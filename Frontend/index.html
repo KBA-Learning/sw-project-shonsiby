@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+    <script src="./app.js"></script>
+    <link rel='stylesheet' href='stylesheets/style.css' />
+    <link rel='stylesheet' href='stylesheets/searchStyle.css' />
+    
+</head>
+
+<body>
+    <div class="header">
+        
+        <h1 style="text-align: center;">Certificate Dapp</h1>
+        <div class="right-corner-component">
+            <a class="active" href="index.html">Home</a>
+            <a href="issueCertificate.html">Issue Certificate</a>
+        </div>
+    </div>
+    <div style="text-align:center">
+        <br /><br />
+        <img src="Logo.png" width="200" height="200">
+        <br /><br /><br />
+       
+    </div>
+    <div class="search" >
+        <input type="text" id="certificateID" name="certificateID" class="text-box-with-border"
+            placeholder="Enter Certificate ID to View">
+        <button  class="searchButton" onclick="redirectToPage()">
+            Search
+        </button>
+      
+        <script>
+            async function redirectToPage() {
+                const id=document.getElementById("certificateID").value;
+                console.log(id);
+                
+               
+               await fetch(`http://127.0.0.1:8000/view/${id}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            alert(`Please check Cetificate ID ${id}`);
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                       
+                        return response.json();
+                        })
+                        .then(data => {
+                        console.log('Success:', data);
+                        const {courseName,candidateName,grade,date}=data;
+                        localStorage.setItem('certificateID',id)
+                        localStorage.setItem('courseName',courseName);
+                        localStorage.setItem('candidateName',candidateName);
+                        localStorage.setItem('grade',grade);
+                        localStorage.setItem('date',date)
+                        window.location.href="viewCertificate.html";
+                        })
+                        .catch(error => {
+                        console.error('Error:', error);
+                        });
+
+                       
+            
+                
+        }
+       
+            
+        </script>
+    </div>
+</body>
+
+</html>
