@@ -1,3 +1,31 @@
+# Git Configuration
+```bash
+git config --global user.name ""//Enter your Github username here
+git config --global user.email ""//Enter your Github email ID
+```
+In order to work with git on different systems we need ssh key or Personal Access Token. 
+
+Let's see how to use ssh key.
+
+```bash
+ssh-keygen -t ed25519 -C "recognizable tag" //Replace the recognizable tag with whatever you like
+```
+Here it will prompt for path location and password. The default folder and empty password will be setup if you just press enter.
+
+```bash
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_ed25519
+
+cat ~/.ssh/id_ed25519.pub
+```
+
+**Copy from ssh to the last don’t include the tag.** 
+
+Now go to the settings and select ssh and gpg keys and paste this key.
+
+Now if you clone using **ssh**. It will automatically be cloned to your local sytem.
+
 # CertificateApp
 
 
